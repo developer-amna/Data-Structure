@@ -103,3 +103,27 @@ int main()
 		}
 		return 0;
 }
+
+// program #6
+ #include<iostream>
+using namespace std;
+
+int main() {
+    int arr[10] = {5, 6, 5, 5, 6, 6, 7, 7, 6, 7};
+    int count5 = 0, count6 = 0, count7 = 0;
+
+    for(int i = 0; i < 10; i++) {
+        if(arr[i] == 5)
+            count5++;
+        else if(arr[i] == 6)
+            count6++;
+        else if(arr[i] == 7)          //counting occurrences of 7
+            count7++;
+    }
+     // Display the counts
+    cout << "5 repeated " << count5 << " times\n";
+    cout << "6 repeated " << count6 << " times\n";
+    cout << "7 repeated " << count7 << " times\n";
+
+    return 0;
+}
