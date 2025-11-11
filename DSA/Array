@@ -127,3 +127,44 @@ int main() {
 
     return 0;
 }
+
+// program #7
+#include<iostream>
+using namespace std;
+int main()
+{
+	int rows, cols;
+	cout<<"Enter number of rows: ";
+	cin>>rows;
+	cout<<"Enter number of columns: ";
+	cin>>cols;
+	int arr1[10][10], arr2[10][10], result[10][10];
+     cout<<"\nEnter value in Array 1:\n";
+	//input for first array
+	for(int i=0;i<rows;i++){
+		for(int j=0;j<cols;j++){
+			cin>>arr1[i][j];
+		}
+}
+//input for second array
+ cout<<"\nEnter value in Array 2:\n";
+	for(int i=0;i<rows;i++){
+		for(int j=0;j<cols;j++){	
+			cin>>arr2[i][j];
+		}
+	}
+	for(int i=0;i<rows;i++){           //adding two arrays
+		for(int j=0;j<cols;j++){	
+	       result[i][j] = arr1[i][j] + arr2[i][j];
+		}
+	}
+	//displaying result
+	cout<<"\nResult = Array1 + Array2\n";
+	for(int i=0;i<rows;i++){
+		for(int j=0;j<cols;j++){	
+	       cout<<result[i][j]<<"\t"; 
+		}
+		cout<<endl;
+	}
+return 0;	
+}
