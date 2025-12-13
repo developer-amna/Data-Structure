@@ -524,3 +524,60 @@ int main() {
 
     return 0;
 }
+
+\\ Program 4
+
+#include<iostream>
+using namespace std;
+struct node{
+	node *previous;
+	int data;
+	node *next;
+};
+class list{
+	private:
+		node *current,*start,*temp;
+	public:
+		list(){
+			start = NULL;
+		}
+		void add_item(int);
+		void display(void);
+		
+};
+void list::add_item(int x){
+	temp=new node;
+	temp->data=x;
+	temp->next=NULL;
+	if(start ==NULL){
+		temp->previous=NULL;
+		start = temp;
+	}
+	else{
+		current  = start;
+		while(current->next!=NULL)
+		    current = current->next;
+		current->next = temp;
+		temp->previous = current;
+		
+	}
+}
+void list::display(){
+	cout<<"Data in doubly linked list\n";
+	current = start;
+	while(current!=NULL){
+		cout<<current->data<<endl;
+		current = current->next;
+	}
+}
+int main(){
+	list obj;
+	int value;
+	cout<<"Enter five values\n";
+	for(int i=0;i<=5;i++){
+		cin>>value;
+		obj.add_item(value);
+	}
+	obj.display();
+}
+	
