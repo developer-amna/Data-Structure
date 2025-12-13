@@ -360,3 +360,167 @@ int main(){
 	   }
 	   return 0;
 	   }
+
+	   \\ Program 3
+
+	   #include<iostream>
+#include<string.h>
+using namespace std;
+
+struct node {
+    int rollno;
+    char name[50];
+    node* link;
+};
+
+class list {
+private:
+    node* start;
+public:
+    list() {
+        start = NULL;
+    }
+
+    void insert_begin();
+    void insert_end();
+    void insert_location();
+    void search();
+    void display();
+    int count();
+};
+
+void list::insert_begin() {
+    node* temp = new node;
+    cout << "Enter Roll No: ";
+    cin >> temp->rollno;
+    cout << "Enter Name: ";
+    cin.ignore();
+    cin.getline(temp->name, 50);
+    temp->link = NULL;
+
+    if (start == NULL) {
+        start = temp;
+    } else {
+        temp->link = start;
+        start = temp;
+    }
+}
+
+void list::insert_end() {
+    node* temp = new node;
+    cout << "Enter Roll No: ";
+    cin >> temp->rollno;
+    cout << "Enter Name: ";
+    cin.ignore();
+    cin.getline(temp->name, 50);
+    temp->link = NULL;
+
+    if (start == NULL) {
+        start = temp;
+    } else {
+        node* current = start;
+        while (current->link != NULL)
+            current = current->link;
+        current->link = temp;
+    }
+}
+
+void list::insert_location() {
+    int searchRoll;
+    cout << "Enter Roll No to insert after: ";
+    cin >> searchRoll;
+
+    node* current = start;
+    while (current != NULL) {
+        if (current->rollno == searchRoll) {
+            node* temp = new node;
+            cout << "Enter New Roll No: ";
+            cin >> temp->rollno;
+            cout << "Enter Name: ";
+            cin.ignore();
+            cin.getline(temp->name, 50);
+
+            temp->link = current->link;
+            current->link = temp;
+            return;
+        }
+        current = current->link;
+    }
+    cout << "Roll No not found.\n";
+}
+
+void list::search() {
+    int searchRoll;
+    cout << "Enter Roll No to search: ";
+    cin >> searchRoll;
+
+    node* current = start;
+    while (current != NULL) {
+        if (current->rollno == searchRoll) {
+            cout << "Record Found:\n";
+            cout << "Roll No: " << current->rollno << "\n";
+            cout << "Name: " << current->name << "\n";
+            return;
+        }
+        current = current->link;
+    }
+    cout << "Record not found.\n";
+}
+
+void list::display() {
+    if (start == NULL) {
+        cout << "List is empty\n";
+        return;
+    }
+
+    node* current = start;
+    int rec = 1;
+    while (current != NULL) {
+        cout << "\nRecord #" << rec << "\n";
+        cout << "Roll No: " << current->rollno << "\n";
+        cout << "Name: " << current->name << "\n";
+        current = current->link;
+        rec++;
+    }
+}
+
+int list::count() {
+    int cnt = 0;
+    node* current = start;
+    while (current != NULL) {
+        cnt++;
+        current = current->link;
+    }
+    return cnt;
+}
+
+int main() {
+    list obj;
+    int op;
+    bool loop = true;
+
+    while (loop) {
+        cout << "\n01- Insert student at beginning\n";
+        cout << "02- Insert student at end\n";
+        cout << "03- Insert student after roll number\n";
+        cout << "04- Search student by roll number\n";
+        cout << "05- Display all student records\n";
+        cout << "06- Count total students\n";
+        cout << "07- Exit\n";
+        cout << "Enter your option [1-7]: ";
+        cin >> op;
+
+        switch (op) {
+            case 1: obj.insert_begin(); break;
+            case 2: obj.insert_end(); break;
+            case 3: obj.insert_location(); break;
+            case 4: obj.search(); break;
+            case 5: obj.display(); break;
+            case 6: cout << "Total students: " << obj.count() << "\n"; break;
+            case 7: loop = false; break;
+            default: cout << "Invalid option\n";
+        }
+    }
+
+    return 0;
+}
