@@ -581,3 +581,255 @@ int main(){
 	obj.display();
 }
 	
+\\Program # 5
+
+#include<iostream>
+using namespace std;
+struct node{
+	node *previous;
+
+	int data;
+	node *next;
+};
+class dll{
+	private:
+		node *start;
+	public:
+	
+		dll(void){
+			start = NULL;
+		}
+	    void insert_begin(void);
+	    void insert_end(void);
+	    void insert_location(void);
+	    void delete_begin(void);
+	    void delete_end(void);
+	    void delete_location(void);
+		void forward_display(void);
+		void backward_display(void);
+		
+};
+void dll::insert_begin(void){
+	struct node *temp;
+	temp = new node;
+	cout<<"Enter the data value for the node:";
+	cin>>temp->data;
+	temp->previous = NULL;
+	if(start==NULL){
+		temp->next = NULL;
+		start = temp;
+	}
+	else{
+		temp->next = start;
+		start->previous = temp;
+		start = temp;
+	}
+}
+void dll::insert_end(void){
+	struct node *temp,*current;
+	temp = new node;
+	cout<<"Enter the data value for the node:";
+	cin>>temp->data;
+	temp->next = NULL;
+	if(start==NULL){
+		temp->previous = NULL;
+		start = temp;
+	}
+	else{
+		current = start;
+		while(current->next!=NULL)
+		       current = current->next;
+		       current->next = temp;
+		       temp->previous = current;
+	}
+}
+void dll::insert_location(void){
+	struct node *temp,*current;
+	int x,y;
+	temp = new node;
+	cout<<"Enter the value to insert:";
+	cin>>x;
+	temp->data = x;
+	if(start==NULL){
+		temp->next = NULL;
+		temp->previous = NULL;
+		start = temp;
+		return;
+	}
+	else{
+		cout<<"Enter teh value to search:";
+		cin>>y;
+		current = start;
+		while(current!=NULL){
+			if(current->data==y)
+			break;
+			current = current->next;
+		}
+		if(current==NULL){
+			cout<<"Value not found in the list:";
+			return;
+		}
+		if(current->next==NULL){
+			temp->next = NULL;
+			current->next = temp;
+			temp->previous = current;
+		}
+		else{
+			temp->next = current->next;
+			temp->previous = current;
+			(current->next)->previous = temp;
+			current->next = temp;
+		}
+	}
+}
+void dll::delete_begin(void){
+	struct node *temp;
+	if(start==NULL){
+		cout<<"List is empty:";
+		return;
+	}
+	else{
+		temp = start;
+		cout<<"Data of first node:"<<temp->data;
+		start = start->next;
+		start->previous = NULL;
+		delete temp;
+		cout<<endl<<"First node is deleted.";
+	}
+}
+void dll::delete_end(void){
+	struct node *temp,*current;
+	if(start==NULL){
+		cout<<"List is empty";
+		return;
+	}
+	else{
+		current = start;
+		while(current->next!=NULL)
+		       current = current->next;
+	    temp = current;
+	    cout<<"Data of last node is:"<<current->data;
+	    current = current->previous;
+	    current->next = NULL;
+	    delete temp;
+	    cout<<endl<<"Last node is deleted.";
+	}
+	
+}
+void dll::delete_location(void){
+	struct node *temp,*current;
+	if(start==NULL){
+		cout<<"List is empty";
+		return;
+	}
+	int n;
+	cout<<"Enter value to search:";
+	cin>>n;
+	current = start;
+	while(current!=NULL){
+		if(current->data==n)
+		     break;
+		current = current->next;
+	}
+	if(current==NULL){
+		cout<<"Value not found in the list."<<endl;
+		return;
+	}
+	if(current->next==NULL){
+		cout<<"No node after the current node. ";
+		return;
+	}
+	else{
+		temp = current->next;
+		current->next = temp->next;
+		temp->next->previous = current;
+		delete temp;
+		cout<<"Node is deleted:"<<endl;
+	}
+}
+void dll::forward_display(void){
+	struct node *current;
+	if(start==NULL){
+		cout<<"List is empty";
+		return;
+	}
+	else{
+		current = start;
+		cout<<"Data od DDL in forward order\n";
+		while(current!=NULL){
+			cout<<current->data<<endl;
+			current = current->next;
+		}
+	}
+}
+void dll::backward_display(void){
+		struct node *current;
+	if(start==NULL){
+		cout<<"List is empty";
+		return;
+	}
+	else{
+		current = start;
+		while(current->next!=NULL)
+		       current = current->next;
+		 cout<<"Data od DDL in backward order\n";
+		while(current!=NULL){
+			cout<<current->data<<endl;
+			current = current->previous;
+		}      
+	}
+}
+int main(){
+       dll obj;
+	   int op;
+	    bool loop = true;
+	   while(loop){
+	   	cout<<"\n01- Insert a node at the beginning"<<endl;
+	   	cout<<"02- Insert a node at the end"<<endl;
+	   	cout<<"03- Insert a node at a specific location"<<endl;
+	   	cout<<"04- Delete a node at the beginning"<<endl;
+	   	cout<<"05- Delete a node at the end"<<endl;
+	   	cout<<"06- Delete a node at a specific location"<<endl;
+	   	cout<<"07- Display data of nodes in forward direction"<<endl;
+	   	cout<<"08- Display data of nodes in backward direction"<<endl;
+	   	
+	   	cout<<"10- Exit"<<endl;
+	   	cout<<"Enter your option[1-10]: ";
+	   	cin>>op;
+	   	switch(op){
+	   		case 1:
+	   			obj.insert_begin();
+	   			break;
+	   		case 2:
+	   			obj.insert_end();
+	   			break;
+	   		case 3:
+	   			obj.insert_location();
+	   			break;
+	   		case 4:
+	   			obj.delete_begin();
+	   			break;
+	   		case 5:
+	   			obj.delete_end();
+	   			break;
+	   		case 6:
+	   			obj.delete_location();
+	   			break;
+	   	    case 8:
+			   obj.forward_display();
+	   		   break;
+	   		case 9:
+			   obj.backward_display();
+	   		   break;
+	   		
+	   		case 10:
+			   loop = false;
+	   	    	break;
+	   		default:
+	   			cout<<"Invalid option";
+	   			break;
+		   }
+		   
+	   }
+	   return 0;
+	   }
