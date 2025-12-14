@@ -793,8 +793,8 @@ int main(){
 	   	cout<<"07- Display data of nodes in forward direction"<<endl;
 	   	cout<<"08- Display data of nodes in backward direction"<<endl;
 	   	
-	   	cout<<"10- Exit"<<endl;
-	   	cout<<"Enter your option[1-10]: ";
+	   	cout<<"9- Exit"<<endl;
+	   	cout<<"Enter your option[1-9]: ";
 	   	cin>>op;
 	   	switch(op){
 	   		case 1:
@@ -815,14 +815,14 @@ int main(){
 	   		case 6:
 	   			obj.delete_location();
 	   			break;
-	   	    case 8:
+	   	    case 7:
 			   obj.forward_display();
 	   		   break;
-	   		case 9:
+	   		case 8:
 			   obj.backward_display();
 	   		   break;
 	   		
-	   		case 10:
+	   		case 9:
 			   loop = false;
 	   	    	break;
 	   		default:
@@ -833,3 +833,59 @@ int main(){
 	   }
 	   return 0;
 	   }
+
+\\ Program 6
+
+#include<iostream>
+using namespace std;
+struct node{
+	int n;
+	node *link;
+};
+class list{
+	private:
+		node *S,*C,*P;
+	public:
+		list(void){
+			S = NULL;
+		}
+		void insert(int);
+		void display(void);
+};
+void list::insert(int data)
+{
+	if(S==NULL){
+		P = new node;
+		P->n = data;
+		S = P;
+	}
+	else{
+		C = new node;
+		C->n = data;
+		P->link = C;
+		P = C;
+	}
+}
+void list::display(void){
+	C = S;
+	cout<<"Values of the list:"<<endl;
+	while(1){
+		cout<<C->n<<endl;
+		if(C==P)
+		    break;
+		C = C->link;
+	}
+}
+int main(){
+	list obj;
+	int x;
+	cout<<"Enter 5 integer values\n";
+	for(int i=1;i<=5;i++){
+		cin>>x;
+		obj.insert(x);
+	}
+	obj.display();
+	return 0;
+}
+
+
