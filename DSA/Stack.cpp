@@ -114,3 +114,40 @@ int main(){
 	obj.display();
 	return 0;
 }
+
+\\ Program # 3
+
+#include<iostream>
+using namespace std;
+class stack{
+	private:
+		int top;
+		int stk[25];
+	public:
+		stack(void){
+			top = -1;
+		}
+		void push_str(char x[]);
+		void pop_str(void);
+		
+};
+void stack::push_str(char x[]){
+	for(int i=0;x[i]!='\0';i++){
+		top++;
+		stk[top] = x[i];
+	}
+}
+void stack::pop_str(void){
+	cout<<"String in reverse order:";
+	for(int i=top;i>=0;i--)
+	          cout<<stk[i];
+}
+int main(){
+	stack obj;
+	char str[25];
+	cout<<"Enter a string:";
+	cin>>str;
+	obj.push_str(str);
+	obj.pop_str();
+	return 0;
+}
