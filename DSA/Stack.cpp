@@ -74,3 +74,43 @@ int main(){
 	}
 	return 0;
 }
+
+\\ Program # 2
+
+#include<iostream>
+using namespace std;
+class stack{
+	private:
+		int top;
+		int stk[15];
+	public:
+		stack(void){
+			top = -1;
+		}
+		void bin(int x);
+		void display(void);
+};
+void stack::bin(int x){
+	int r;
+	while(x>0){
+		r = x%2;
+		top = top + 1;
+		stk[top] = r;
+		x = x/2;
+	}
+}
+void stack::display(void){
+	cout<<"Value in binary=(";
+	for(int i=top;i>=0;i--)
+	         cout<<stk[i];
+	cout<<")2";
+}
+int main(){
+	stack obj;
+	int n;
+	cout<<"Enter an integer value:";
+	cin>>n;
+	obj.bin(n);
+	obj.display();
+	return 0;
+}
