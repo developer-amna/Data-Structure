@@ -151,3 +151,101 @@ int main(){
 	obj.pop_str();
 	return 0;
 }
+
+\\ Program # 4
+
+#include<iostream>
+#include<cctype>
+using namespace std;
+int priority(char);
+class infix_postfix{
+	private:
+		char stack[20];
+		int top;
+	public:
+		infix_postfix(){
+			top = -1;
+		}
+		void scan(char[]);
+		void push(char);
+		char pop(void);
+};
+void infix_postfix::scan(char str_exp[]){
+	char ch,output[80],temp;
+	int c = 0;
+	for(int i = 0;str_exp[i]!='\0';i++){
+		ch = str_exp[i];
+		if(isalpha(ch) || isdigit(ch)){
+			output[c] = ch;
+			c++;
+		}
+		else if(ch=='(')
+             push(ch);
+        else if(ch==')'){
+        	temp = pop();
+        	while(temp!='('){
+        		output[c] = temp;
+        		c++;
+        		temp = pop();
+        	}
+        }
+        else if(ch=='^' || ch=='*' || ch=='/' || ch=='+' || ch=='-'){
+        	if(top==-1)
+        	         push(ch);
+        	else{
+        		int op_ch;
+        		op_ch = priority(ch);
+        		while(priority(stack[top])>=op_ch && top!=-1){
+        			temp = pop();
+        			output[c] = temp;
+        			c++;
+        		}
+        		push(ch);
+        	}
+        }
+	}
+	int j = c;
+    while (top >= 0) {
+        output[j++] = pop();
+    }
+    output[j] = '\0';
+
+    cout << "Postfix expression = " << output << endl;
+}
+
+void infix_postfix::push(char x){
+	top++;
+	stack[top] = x;
+}
+char infix_postfix::pop(void){
+	char r;
+	r = stack[top];
+	top--;
+	return r;
+}
+int priority(char op){
+	switch(op){
+		case'^':
+			return 4;
+			break;
+		case'*':
+		case'/':
+			return 3;
+			break;
+		case'+':
+		case'-':
+			return 2;
+			break;
+		default:
+			return 0;
+	}
+}
+int main(){
+	infix_postfix obj;
+	char exp[100];
+	cout<<"Enter infix expression without spaces:";
+	cin>>exp;
+	obj.scan(exp);
+	return 0;
+}
+	
