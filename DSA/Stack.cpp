@@ -354,3 +354,51 @@ int main()
 	
 	return 0;
 }
+
+\\ Program # 8
+
+#include<iostream>
+#include<stack>
+using namespace std;
+class solution{
+	public:
+		bool isValid(string str){
+			stack<char>st;
+			for(int i=0;i<str.size();i++){
+				if(str[i]=='(' || str[i]=='{' || str[i]=='['){
+				  st.push(str[i]);	
+				}
+				else{
+					if (st.size() == 0){
+						return false;
+					}
+					if ((st.top() =='(' && str[i] ==')')||
+					    (st.top() == '{' && str[i] == '}')||
+						(st.top() == '[' && str[i] == ']')){
+							st.pop();
+						}
+						else{
+							return false;
+						}
+				}
+			}
+			return st.empty();
+		}
+	
+		
+		
+};
+int main() {
+    solution obj;
+    string s;
+    cout << "Enter string of brackets: ";
+    cin >> s;
+
+    if (obj.isValid(s)) {
+        cout << "Valid Parentheses" << endl;
+    } else {
+        cout << "Invalid Parentheses" << endl;
+    }
+
+    return 0;
+}
