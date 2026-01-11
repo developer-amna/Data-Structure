@@ -160,3 +160,136 @@ int main() {
     }   // end of while
     return 0;
 }   // end of main
+
+// Program # 3
+
+#include<iostream>
+using namespace std;
+class deque {
+	private:
+		int F,B,DQ[5];
+	public:
+		// constructor to initialize F & B
+	deque() {
+		F = -1;
+		B = -1;
+	}
+	void insert_front(int);
+	void insert_back(int);
+	void del_front(void);
+	void del_back(void);
+	void print_deque(void);
+};
+// member function to insert item from front side of the deque
+void deque::insert_front(int n) {
+	if (F == 0 && B == 4) {
+		cout << "Deque is full.";
+		return;
+	}
+	if (F == -1 && B == -1) {
+		B = F = 0;
+		DQ[F] = n;
+	}
+	else if(F > 0) {
+		F--;
+		DQ[F] = n;
+	}
+	else {
+		cout << "No space from front side ";
+	}
+} // end of insert_front
+
+                  // member function to insert item from back side of the deque
+void deque::insert_back(int n) {
+	if (F == 0 && B == 4) {
+		cout << "Deque is full.";
+		return;
+	}
+	if (F == -1 && B == -1) {
+		B = F = 0;
+		DQ[B] = n;
+	}
+	else if(B < 4) {
+	    B++;
+		DQ[B] = n;
+	}
+	else {
+		cout << "No space from rear side ";
+	}
+} // end of insert_back
+
+                    // member function to delete item from front side of the deque
+                    
+void deque::del_front() {
+	if (F == -1 && B == -1) {
+		cout << "Deque is empty.";
+		return;
+	}
+	else 
+	     DQ[F] = NULL;
+	if(F == B) 
+	    F = B = -1;
+	else if(F == 4)
+	    F == -1;
+	else
+	    F++;
+}   // end of del_front()
+
+                   // member function to delete item from back side of the deque
+void deque::del_back() {
+	if (F == -1 && B == -1) {
+		cout << "Deque is empty.";
+		return;
+	}
+	else 
+	           DQ[B] = NULL;
+    if(B==F)
+               F = B = -1;
+    else
+               B--;
+} // end of del_back
+
+                    // member function to display data from deque
+void deque::print_deque() {
+	cout << "\nDeque after operation\n";
+	if(F == -1) {
+		cout << "Queue is empty.";
+		return;
+	}
+	for(int i=F; i<=B; i++)
+	          cout << DQ[i] << "\t";
+} // end of print
+int main() {
+	deque obj;
+	int opt, val;
+	while(opt!=5) {
+		cout << "1 : Insert item from Front\n";
+		cout << "2 : Insert item from Back\n";
+		cout << "3 : Delete item from Front\n";
+		cout << "4 : Delete item from Back\n";
+		cout << "5 : Exit\n";
+		cout << "Enter your choice :[1-5] : ";
+		cin >> opt;
+		switch(opt) {
+			case 1:
+				cout << "\nEnter value to insert : ";
+				cin >> val;
+				obj.insert_front(val);
+				obj.print_deque();
+				break;
+		    case 2:
+		    	cout << "\nEnter value to insert : ";
+				cin >> val;
+				obj.insert_back(val);
+				obj.print_deque();
+				break;
+			case 3:
+				obj.del_front();
+				obj.print_deque();
+				break;
+			case 4:
+				obj.del_back();
+		} // end of switch
+	}  // end of while
+	return 0;
+}  // end of main()
