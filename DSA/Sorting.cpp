@@ -87,3 +87,44 @@ int main() {
       obj.print();
       return 0;
 }
+
+// Program # 3
+       // Insertion Sort
+
+#include<iostream>
+using namespace std;
+class insertion {
+	private:
+		int abc[5];
+	public:
+		void input(void);
+		void sort(void);
+		void print(void);
+};
+void insertion::input(void) {
+	cout << "Enter 5 values " << endl;
+	for(int i=0;i<=4;i++)
+	         cin >> abc[i];
+}
+void insertion::sort(void) {
+	int val,i,u;
+	for(u=1;u<=4;u++) {
+		val = abc[u];
+		for(i=u;i>=0 && val<abc[i-1];i--)
+		       abc[i] = abc[i-1];
+		abc[i] = val;
+	}
+}
+void insertion::print(void) {
+	cout << "Sorted array " << endl;
+	for(int i=0;i<=4;i++)
+	       cout << abc[i] << "\t";
+	cout << endl;
+}
+int main() {
+	insertion obj;
+	obj.input();
+	obj.sort();
+	obj.print();
+	return 0;
+}
