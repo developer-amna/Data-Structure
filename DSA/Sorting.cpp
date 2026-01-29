@@ -128,3 +128,48 @@ int main() {
 	obj.print();
 	return 0;
 }
+
+// Program # 4
+         // Shell Sort
+
+#include<iostream>
+using namespace std;
+class shell {
+	private:
+		int arr[5];
+	public:
+		void input(void);
+		void sort(void);
+		void display(void);
+};
+void shell::input(void) {
+	cout << "Enter 5 values " << endl;
+	for(int i=0;i<=4;i++)
+	         cin >> arr[i];
+}
+void shell::sort(void) {
+	int j,gap;
+	gap = 5/2;
+	while(gap>0) {
+		for (int i=gap;i<5;i++) {
+			int temp = arr[i];
+			for(j=i;j>=gap && temp<arr[j-gap];j-=gap)
+			      arr[j] = arr[j-gap];
+			arr[j] = temp;
+		}
+		gap = gap/2;
+	}
+}
+void shell::display(void) {
+	cout << "Sorted array " << endl;
+	for(int i=0;i<=4;i++)
+	       cout << arr[i] << "\t";
+	cout << endl;
+}
+int main() {
+	shell obj;
+	obj.input();
+	obj.sort();
+	obj.display();
+	return 0;
+}
