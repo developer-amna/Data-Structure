@@ -173,3 +173,62 @@ int main() {
 	obj.display();
 	return 0;
 }
+
+// Program # 5
+          // Quick Sort
+
+#include<iostream>
+using namespace std;
+             void quicksort(int[],int,int);
+             int partition(int[],int,int);
+             
+void quicksort(int arr[],int first,int last) {
+	int split_point;
+	if(first < last) {
+	        split_point = partition(arr,first,last);
+			
+			      // sort left and right
+			quicksort(arr,first,split_point-1);
+			quicksort(arr,split_point+1,last);	
+	}
+}    // end of quicksort()
+
+              // definition of partition function
+int partition(int arr[],int first,int last) {
+	int temp,L,R,pivot = arr[first];
+	L = first + 1;
+	R = last;
+	while(1) {
+		while(arr[L]<=pivot && L<=R)
+		        L++;
+		while(arr[R]>=pivot && R>=L)
+		        R--;
+		if(R<L) {
+			temp = arr[first];
+			arr[first] = arr[R];
+			arr[R] = temp;
+			break;
+		}
+		else {
+			temp = arr[L];
+			arr[L] = arr[R];
+			arr[R] = temp;
+			L++;
+			R--;
+		}
+	}
+	return R;
+}  // end of partition()
+int main() {
+	int i,arr[] = {2,15,1,61,11,27,8};
+	cout<<"Array before sorting"<<endl;
+	for(i=0;i<=6;i++)
+	         cout<<arr[i]<<"\t";
+	cout<<endl;
+	quicksort(arr,0,6);
+	cout<<"Array after sorting"<<endl;
+	for(i=0;i<=6;i++)
+	         cout<<arr[i]<<"\t";
+	cout<<endl;
+	return 0;
+}
