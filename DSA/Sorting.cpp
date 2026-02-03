@@ -232,3 +232,75 @@ int main() {
 	cout<<endl;
 	return 0;
 }
+
+// Program # 6
+          // Merge sort
+
+#include<iostream>
+using namespace std;
+         void MergeSort(int[],int,int);
+         void Merge(int[],int,int,int);
+         
+void MergeSort(int arr[],int start,int end) {
+	if(start < end) {
+		int mid = (start + end) / 2;
+		           // Sort first and second halves
+		
+		MergeSort(arr,start,mid);
+		MergeSort(arr,mid+1,end);
+		Merge(arr,start,mid,end);
+	}
+}     // end of MergeSort() 
+
+           // definition of merge function that merges the sub-arrays
+void Merge(int arr[],int start,int mid,int end) {
+	int i,j,k;
+	int n1 = mid - start + 1;
+	int n2 = end - mid;
+	int L[3],R[3];
+	for(i=0;i<n1;i++)
+	            L[i] = arr[start+i];
+	for(j=0;j<n2;j++)
+	            R[j] = arr[mid+1+j];
+	            
+	i = 0;
+	j = 0;
+	k = start;
+	
+	while(i<n1 && j<n2) {
+		if(L[i] <= R[j]) {
+			arr[k] = L[i];
+			i++;
+		}
+		else {
+			arr[k] = R[j];
+			j++;
+		}
+		k++;
+	}
+	while(i < n1) {
+		arr[k] = L[i];
+		i++;
+		k++;
+	}
+	
+	while(j < n2) {
+		arr[k] = R[j];
+		j++;
+		k++;
+	}
+}
+
+int main() {
+	int i,arr[] = {12,11,13,5,6,7};
+	cout<<"The given array before sorting"<<endl;
+	for(i=0;i<6;i++)
+	         cout<<arr[i]<<"\t";
+	cout<<endl;
+	MergeSort(arr,0,5);
+	cout<<"Array after sorting"<<endl;
+	for(i=0;i<6;i++)
+	         cout<<arr[i]<<"\t";
+	         
+	return 0;
+}
