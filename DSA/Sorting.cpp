@@ -304,3 +304,51 @@ int main() {
 	         
 	return 0;
 }
+
+// Program # 7
+       // Counting Sort
+
+#include<iostream>
+using namespace std;
+class Count {
+	public:
+		void Count_Sort(int[],int);
+		int max_value(int[]);
+};
+void Count::Count_Sort(int ARR1[],int mx) {
+	int *C,*S,i;
+	C = new int[mx];
+	S = new int[mx];
+	for(i=0;i<=mx;i++)
+	C[i] = S[i] = NULL;
+	
+	for(i=0;i<5;i++)
+	          C[ARR1[i]] = C[ARR1[i]]+1;
+	          
+	for(i=0;i<mx;i++)
+	       C[i+1] = C[i] + C[i+1];
+	       
+	for(i=0;i<=4;i++) {
+		S[C[ARR1[i]]] = ARR1[i];
+		C[ARR1[i]]--;
+	}
+	cout << "Sorted Array " << endl;
+	for(i=0;i<=mx;i++)
+	         if(S[i]!=NULL)
+	                   cout << S[i] <<"\t";
+}
+int Count::max_value(int a[]) {
+	int max = a[0];
+	for(int i=0;i<5;i++) {
+		if(a[i] > max)
+		            max = a[i];
+	}
+	return max;
+}
+int main() {
+	Count obj;
+	int m,ARR[5] = {2,4,1,6,4};
+	m = obj.max_value(ARR);
+	obj.Count_Sort(ARR,m);
+	return 0;
+};
