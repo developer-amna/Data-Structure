@@ -168,3 +168,67 @@ int main()
 	}
 return 0;	
 }
+
+// Program # 8
+        // Insertuin at specified location
+
+#include <iostream>
+using namespace std;
+
+class MyArray {
+    int arr[100];   // fixed size array
+    int size;       // current size of array
+
+public:
+    
+    MyArray(int s) {
+        size = s;
+        cout << "Enter " << size << " values for array:" << endl;
+        for (int i = 0; i < size; i++) {
+            cin >> arr[i]; // user input values
+        }
+    }
+
+    // function to display array
+    void display() {
+        cout << "Array elements: ";
+        for (int i = 0; i < size; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+
+    // function to insert element at given position
+    void insertAt(int pos, int value) {
+        if (pos < 0 || pos > size) {
+            cout << "Invalid position!" << endl;
+            return;
+        }
+        // shift elements to right
+        for (int i = size; i > pos; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[pos] = value; // insert new value
+        size++;           // increase size
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter initial size of array: ";
+    cin >> n;
+
+    MyArray obj(n); 
+    obj.display();
+
+    int pos, val;
+    cout << "Enter position to insert: ";
+    cin >> pos;
+    cout << "Enter value to insert: ";
+    cin >> val;
+
+    obj.insertAt(pos, val);
+    obj.display();
+
+    return 0;
+}
