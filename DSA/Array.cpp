@@ -170,7 +170,7 @@ return 0;
 }
 
 // Program # 8
-        // Insertuin at specified location
+        // Insertion at specified location
 
 #include <iostream>
 using namespace std;
@@ -228,6 +228,66 @@ int main() {
     cin >> val;
 
     obj.insertAt(pos, val);
+    obj.display();
+
+    return 0;
+}
+
+// Program # 9 
+     // Deletion from specified location
+
+#include <iostream>
+using namespace std;
+
+class MyArray {
+    int arr[100];   // fixed size array
+    int size;       // current size of array
+
+public:
+     MyArray(int s) {
+        size = s;
+        cout << "Enter " << size << " values for array:" << endl;
+        for (int i = 0; i < size; i++) {
+            cin >> arr[i]; // user input values
+        }
+    }
+
+    // function to display array
+    void display() {
+        cout << "Array elements: ";
+        for (int i = 0; i < size; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+
+    // function to delete element at given position
+    void deleteAt(int pos) {
+        if (pos < 0 || pos >= size) {
+            cout << "Invalid position!" << endl;
+            return;
+        }
+        // shift elements to left
+        for (int i = pos; i < size - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        size--; // decrease size
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter initial size of array: ";
+    cin >> n;
+
+    MyArray obj(n); 
+    obj.display();
+
+    int pos;
+    cout << "Enter position to delete: ";
+    cin >> pos;
+
+    obj.deleteAt(pos);
     obj.display();
 
     return 0;
