@@ -292,3 +292,41 @@ int main() {
 
     return 0;
 }
+
+// Program # 10
+       // Data in tabular Form
+
+#include <iostream>
+#include <iomanip> // setw() 
+using namespace std;
+
+int main() {
+    int rows, cols;
+
+    cout << "Enter number of rows: ";
+    cin >> rows;
+    cout << "Enter number of columns: ";
+    cin >> cols;
+
+    int table[50][50]; // maximum 50x50 ka table
+
+    // Input values
+    cout << "Enter values for the table:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << "Element [" << i << "][" << j << "]: ";
+            cin >> table[i][j];
+        }
+    }
+
+    // Display in tabular form
+    cout << "\nTable in tabular form:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << setw(6) << table[i][j]; // setw() 
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
