@@ -330,3 +330,52 @@ int main() {
 
     return 0;
 }
+
+// Program # 11
+         //Largest and smallest in tabular form
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    int rows,cols;
+    cout << "Enter number of rows: ";
+    cin >> rows;
+    cout << "Enter number of columns: ";
+    cin >> cols;
+    int table[50][50]; 
+    // Input values
+    cout << "Enter values for the table:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << "Element [" << i << "][" << j << "]: ";
+            cin >> table[i][j];
+        }
+    }
+    // Display in tabular form
+    cout << "\nTable in tabular form:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << setw(6) << table[i][j];
+        }
+        cout << endl;
+    }
+    // Find largest and smallest
+    int largest = table[0][0];
+    int smallest = table[0][0];
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (table[i][j] > largest) {
+                largest = table[i][j];
+            }
+            if (table[i][j] < smallest) {
+                smallest = table[i][j];
+            }
+        }
+    }
+    cout << "\nLargest value in table: " << largest << endl;
+    cout << "Smallest value in table: " << smallest << endl;
+    return 0;
+}
