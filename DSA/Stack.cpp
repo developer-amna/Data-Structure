@@ -16,7 +16,7 @@ class stack{
 };
 void stack::push(int x){
 	if(top==4){
-		cout<<"stack is empty.";
+		cout<<"stack overflow.";
 		return;
 	}
 	top = top+1;
